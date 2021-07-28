@@ -1,0 +1,1215 @@
+1---------ACESSORIOS ------------------
+
+https://github.com/tutorialesvirtuales/Curso-Laravel
+https://github.com/jeroennoten/Laravel-AdminLTE
+fontawesone.io
+-------------------PROBLEMAS
+# composer dump-autoload
+# php artisan migrate:refresh
+php artisan migrate:fresh
+composer dump-autoload
+
+2----CRIA PROJETO sacola no cmd (prompt)--------------------------
+
+C:\Users\barbosa>cd\
+
+C:\>cd wamp64\www\
+
+C:\wamp64\www>composer create-project --prefer-dist laravel/laravel sacola
+
+
+
+3---------------CRIA ARQUIVO BAT-- > (faz um bloco de nota e salva com extensão .bat
+cd\
+cd wamp64\www\sacola
+php artisan serve
+------------------------------------------------------------------------------
+
+----------------JA QUE VAMOS USAR O User PADRÃO VAMOS EM app\Provider\AppServiceProvider  
+-------FAÇA ISSSO , É IMPORTANTE
+
+use Illuminate\Support\Facades\Schema;
+
+/////
+public function boot()
+    {
+        Schema::defaultStringLength(191);
+    }
+
+
+
+-------------------------------------------------------------------INICIO
+
+
+
+
+4----------------------------------------------------------------------------
+PROJETO CRIADO VAMOS EM ENV
+APP_NAME=sacola
+APP_ENV=local
+APP_KEY=base64:VfcP69XYlAsaQO98KRosm53d4RBJoyYvFhlqKTZocLo=
+APP_DEBUG=true
+APP_URL=http://sacola.teste
+
+LOG_CHANNEL=stack
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sacola
+DB_USERNAME=carlos
+DB_PASSWORD=casb
+
+----------------------------------------------------------------------------
+DEPOIS EM config\app.php
+ 'timezone' => 'America/Sao_Paulo',
+----------------------------------------------------------------------------
+CRIAR NOSSO DIRETORIO DE MODELS em app e ARRASTA O User.php PARA DENTRO MUDANDO O NAMESPACE
+namespace App\Models;
+----------------------------------------------------------------------------
+VAMOS EM config\auth.php e atualizamos o namespace do models User 
+        'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+----------------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------------
+5----------------------------------------------------------------------------AdminLT3
+OBSERVAÇÃO : TIVE QUE BAIXAR O COMPOSER 2 no site oficial, instalar no PC e FAZER A ATUALIZAÇÂO
+# composer update jeroennoten/laravel-adminlte
+----------AI PULEI para linha de instalação 93 (php artisan adminlte:install) pelo terminal ...DEU CERTO
+---------------------------------------------------
+
+
+VAMOS USAR O PACOTE AdminLT3 ENCONTAMOS NO LINK ABAIXO
+AdminLTE Laravel: https://github.com/jeroennoten/Laravel-AdminLTE
+
+INSTALAR O PACOTE VIA TERMINAL
+# composer require jeroennoten/laravel-adminlte
+E DEPOIS CONFERE A INSTALAÇÂO DEFINITIVA
+# php artisan adminlte:install
+
+MODIFICOU ALGUNAS COISA NO NOSSO PROJETO, PRINCIPALMENTE A CRIAÇÂO DE Vendor NO NOSSO DIRETORIO Public (DE TERCEIROS)
+EM Config ELE JA COLOCA UMA PASTA AdminLTE e em Resource\vendor\adminLte ja colocou os idiomas ETC...(lang)
+----------------------------------------------------------------------------
+VAMOS EM config\adminlte.php E DEFINIMOS NOSSO TEMPALTE CONFORME VONTADE ..exemplo
+ 'title' => 'sacola',
+    'title_prefix' => '',
+    'title_postfix' => '',
+-----------
+ 'logo' => '<b>sacola</b>LTE',
+    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo_img_xl' => null,
+    'logo_img_xl_class' => 'brand-image-xs',
+    'logo_img_alt' => 'sacola',
+
+ -----------------------------------
+ MAIS O MAIS IMPRTANTE É A PARTE DE MENU e SUBMENU (ONDE TRABALHAMOS COM MENU DO DASHBOARD)
+ VAMOS MEXER COM O DESEVOLVIMENTO DO PROJETO
+
+    'menu' => [
+        [
+            'text' => 'search',
+            'search' => true,
+            'topnav' => true,
+        ],
+        [
+            'text' => 'blog',
+            'url'  => 'admin/blog',
+            'can'  => 'manage-blog',
+        ],
+        [
+            'text'        => 'pages',
+            'url'         => 'admin/pages',
+            'icon'        => 'far fa-fw fa-file',
+            'label'       => 4,
+            'label_color' => 'success',
+-----------------------------------
+
+SE DESEJAR CUSTOMIZAR AS views ----- NAO FIZ (NAO RODEI)
+
+# php artisan adminlte:install --only=main_views
+-----------------------------------------------------------------------------------
+
+
+
+
+--------------------------------------------VAMOS TRABALHAR--FAZER AS MODELS JA COM AS MIGRATION--------------------------------
+
+
+6--------------CRIAR GERAL---------------------------------VAMOS TRABALHAR--FAZER AS MODELS JA COM AS MIGRATION
+# php artisan make:model Models\Geral -mc --resource 
+# php artisan make:model Models\Geral -m  --------------------------------USEI ESSA (MAS A DE CIMA PRETENDO)
+CRIOU A MODEL Geral E A MIGRATION Geral  
+VAMOS EM NIGATTION geral e DEFININOS AS COLUNAS DE NOSSA TABELA
+  public function up()
+    {
+        Schema::create('gerals', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name')->unique();
+            $table->string('url')->unique();
+            $table->double('price' , 10, 2);
+            $table->string('description')->nullable();
+            $table->timestamps();
+        });
+    }
+-------------------------------------------------------
+ E NA MODELS GERAL DEFININOS NOSSO fillable (permisao de dados no BD)
+ class Geral extends Model
+{
+    protected $fillable = ['name', 'url', 'price', 'description'];
+}
+
+7-------------------------------------CRIAR BD------------------------------------------------
+NESSE MOMENTO VAMOS CRIAR UM BD NO phpadmin COM o NOME DE sacola RECOMEDADO utf8mb4_unicode_ci
+
+---------------------------
+8------------------------------------CRIAR TABELAS------------------------------------------------
+NO TERMINAL 
+# php artisan migrate          USEI ESSA   ----
+
+
+
+# php artisan make:migration create_gerals_table    QUANDO FOR ESPECIFICA
+
+------------------------------------------------------------------------GEROU AS 4 TABELAS
+
+-----VAMOS CONTINUAR---------------------------------------- !!!
+
+9------------PRIMEIRAMENTE VAMOS CRIAR UM SEEDER User
+# php artisan make:seeder UsersTableSeeder
+E CODIFICAR , NAO ESQUECER O ---use App\Models\User; LA EM CIMA (pois mudamos o namespace de user para dentro da MODELS)
+<?php
+
+use Illuminate\Database\Seeder;
+use App\Models\User; 
+class UsersTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        User::Create([
+            'name' => 'carlos',
+            'email' => 'carlos@gmail.com',
+            'password' => bcrypt('casb'),
+        ]);
+    }
+    
+}
+
+-----NAO ESQUECER O ---use App\Models\User; LA EM CIMA
+---------EM DATABASEEDER LIBERE O THIS
+public function run()
+    {
+        $this->call(UsersTableSeeder::class);
+        
+    }
+}
+
+-----RODAR SEEDER PARA POPULAR A TELA User
+# php artisan db:seed -----------------------------RODEI ESSE
+
+# php artisan db:seed --class=UsersTableSeeder
+
+-------------------------------------------------------------------POPULOU A TABRELA User 
+
+10------------------CRIAR AS ROTAS-----------------------------------
+--INICIALMENTE FAREMOS UMA POR UMA-------
+--Antes recomendado criar o GeralController --(nesse caso que ainda nao criamos os Metodos, quando for criado a model tipo ressouse ja fica criado)
+com vai ficar no diretorio Admin colocamos o namespace
+
+# php artisan make:controller Admin\GeralController
+
+CRIA Admin\GeralController FALTANDO PREENCHER SEUS METODOS
+class GeralController extends Controller
+{
+    public function index()
+            {
+            return view('admin.pages.gerals.index');
+        }
+}
+    
+
+-----FAZ OU LIBERE A ROUTER EM WEB.php  ----- (PODERIA SER Resource)
+Route::get('/admin/gerals', 'Admin\GeralController@index')->name('gerals.index');
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+----------------E VAMOS CRIAR A View index em Resource\views\admin\pages\gerals
+
+----------------------PEGA O 4. Usage DO AdminLTE E COLOCA (NA DOCUMENTAÇÃO)
+@extends('adminlte::page')
+
+@section('title', 'Dashboard')
+
+@section('content_header')
+    <h1>Dashboard</h1>
+@stop
+
+@section('content')
+    <p>Welcome to this beautiful admin panel.</p>
+@stop
+
+------------------------------------------ OK PERFEITO  A PAGINA index JA ESTA FUNCIONANDO COM A ROUTER (http://127.0.0.1:8000/admin/gerals)
+11----------------------------COMEÇAR A CONFIGURA OAdminLTE - Dashboard ------------------
+Vamos em Config\AdminLT3.php
+menu' => [
+        [
+            'text' => 'search',
+            'search' => true,
+            'topnav' => true,
+        ],
+        [
+            'text' => 'pessoas',
+            'url'  => 'admin/gerals',
+            
+        ],
+
+
+ OU DEIXAR ASSIM -------FICOU COMO ABAIXO (PODE TIRAR O Menu)       
+
+ 'menu' => [
+        // Navbar items:
+        [
+            'type'         => 'navbar-search',
+            'text'         => 'search',
+            'topnav_right' => true,
+        ],
+        [
+            'type'         => 'fullscreen-widget',
+            'topnav_right' => true,
+        ],
+
+        // Sidebar items:
+        [
+            'type' => 'sidebar-menu-search',
+            'text' => 'search',
+        ],
+        [
+            'text' => 'blog',
+            'url'  => 'admin/blog',
+            'can'  => 'manage-blog',
+        ],
+        [
+            'text'        => 'geral',
+            'url'         => 'admin/gerals',
+            'icon'        => 'far fa-fw fa-file',
+            
+        ],
+        
+        [
+            'text' => 'pessoas',
+            'url'  => 'admin/settings',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        
+        
+    ],
+
+12----------------- VAMOS PARA O MODULO PESSOA (fazer realmente os metodos do CRUD)----------
+
+----------COMEÇANDO PELO NOSSA MODEL E MIGRATION 
+
+# php artisan make:model Models\Pessoa -m -----USEI ESSA
+
+# php artisan make:model Models\Pessoa -mc --resource  --(Poderia ser essa pois vem o CONTOLLER com os metodos )
+
+---NA MIGRATION VOCE TEM QUE SABER PERFEITAMENTE OS CAMPOS QUE A TABELA VAI TER 
+   public function up()
+    {
+        Schema::create('pessoas', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name')->required();
+            $table->string('url')->unique();
+            $table->string('vulgo')->required();
+            $table->string('mae')->nullable();
+            $table->string('genero')->nullable();
+            $table->string('rg')->unique();
+            $table->string('exp')->nullable();
+            $table->string('cpf')->unique();
+            $table->string('titulo')->unique();
+            $table->string('natural')->nullable();
+            $table->string('nacionalidade')->nullable();
+            $table->string('nascimeto')->nullable();
+            $table->string('description')->nullable();
+            $table->timestamps();
+            
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('pessoas');
+    }
+}
+
+
+-------------------NA MODEL 
+
+class Pessoa extends Model
+{
+    //
+    protected $fillable = ['name', 'url', 'vulgo', 'mae', 'genero', 'registro', 'expedidor', 'cpf', 'titulo', 'natural', 'nacionalidade', 'nascimeto',  'description'];
+}
+
+13 - RODAR MIGRATE PARA CRIAR NOSSA TABELA pessoas  NO BD 
+
+# php artisan migrate
+
+-------------------------ok perfeito criou a tabela pessoas e tambem a tabela pessoas (não usaremos) no BD
+
+14------CRIAR O CONTROLLER PessoaController ---AQUI VAMOS APENAS FAZER TESTE PARA DEPOIS OTIMIZAR NOSSO CRUD
+
+# php artisan make:controller Admin\PessoaController  -- CRIA Admin\pessoaController FALTANDO PREENCHER SEUS METODOS
+
+# php artisan make:controller Admin\PessoaController --resource ---USEI ESSE (com SEUS METODOS)
+
+
+--------------------------------------------------------SE LOCALIZAR 
+class PessoaController extends Controller
+{
+    public function index()
+            {
+            return view('admin.pages.pessoas.index');
+        }
+}
+    
+------------APENAS PARA SE LOCALIZAR
+ 
+
+15-------CRIAR E LIBERE A ROUTER EM WEB.php (tipo resource)
+//EWRIRADA DE PERFIXOS DAS ROTAS
+
+Route::prefix('admin')
+        ->namespace('Admin')
+         //->middleware('auth')
+        ->group(function() {
+            
+//ROTA PESSOAL (tipo resource)
+Route::resource('pessoas', 'PessoaController');
+
+//Route::resource('pessoas', 'PessoaController');
+
+});
+
+
+//ROTA PESSOAL (rotas de testes, dando certo)
+//Route::resource('/admin/pessoas', 'Admin\PessoaController');
+//Route::get('/admin/pessoas', 'Admin\PessoaController@index')->name('pessoas.index');
+
+//ROTA GERAL
+
+Route::get('/admin/gerals', 'Admin\GeralController@index')->name('gerals.index');
+
+//ROTA INICIAL
+Route::get('/', function () {
+    return view('welcome');
+});
+
+16----------------E VAMOS CRIAR A View index em Resource\views\admin\pages\pessoas
+
+----------------------PEGA O 4. Usage DO AdminLTE E COLOCA (NA DOCUMENTAÇÃO)
+@extends('adminlte::page')
+
+@section('title', 'Dashboard')
+
+@section('content_header')
+    <h1>Dashboard</h1>
+@stop
+
+@section('content')
+    <p>Welcome to this beautiful admin panel.</p>
+@stop
+------------------------------------------   A PAGINA index JA ESTA FUNCIONANDO COM A ROUTER
+--------------VAMOS ESTILIZAR A PAGINA index
+@extends('adminlte::page')
+
+@section('title', 'pessoaos')
+
+@section('content_header')
+<ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('gerals.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('pessoas.index') }}" class="active">Perfis</a></li>
+    </ol>
+<h1>pessoaOS</h1>
+
+@stop
+
+@section('content')
+   
+            <div class="card">
+            <div class="card-header">
+                #filtross
+
+                </div>
+        <div class="card-body">
+
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                     <th style="width: 50px">Ação</th>
+
+                </tr>
+
+            </thead>
+            <body>
+               
+            </body>
+        </table>
+       
+    
+                </div>
+            </div>
+
+@stop
+
+
+----------------------ATE AQUI FOI TESTE NA index , DANDO CERTO
+
+17------------------------------------- VAMOS LISTAR NOSSOS pessoas (fazer realmente os metodos do CRUD)-----------------------
+
+----CODIFICANDO NOSSO CONTROLLER PessoaController, view e model -  ja foi feita parcialmente
+
+------------- vamos trabalhar com CONTROLLER PessoaController
+
+----NO PessoaContoller FARENOS UM __CONSTRUTOR ---CRIAMOS UM 
+Atributo repository PEGAR NOSSO OBJETO Pessoa e JOGAR NA VARIAVEL $pessoa , E NOSSO ATRIBUTO repository RECEBE UM OBJETO DE pessoa
+ARMAZENADA NA VARIAVEL $pessoa
+METODO INDEX--Numa VARIAVEL $pessoas VOU RECUPERAR TODOS o REPOSITIRO (do atributo repository) E PASSAR PARA NOSSA View (poderia ser por conpact)
+Não ESQUECER De DECLARAR A variaveis  $pessoas la em cima
+@
+ namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+use App\Models\Pessoa;
+
+class PessoaController extends Controller
+{
+ 
+    // CONSTRUIR UM CONSTRUTOR
+
+    Protected $repository;
+
+    public function __construct(Pessoa $pessoa)
+    {
+        $this->repository = $pessoa;
+
+    //  $this->middleware(['can:pessoas']);
+    }
+ 
+    
+    public function index()
+    {
+        
+        $pessoas = $this->repository->all();
+        return view('admin.pages.pessoas.index', [
+            'pessoas' => $pessoas,
+            ]);
+    }
+
+
+------COMO O CONTRUCTOR FOI USADO PESSOAS FAREMOS REFERENCIA A MODEL PESSOA EM CIMA DA PAGINA
+
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Pessoa;
+
+------E AGORA PARA LISTAR OS pessoas NA views (admin.pages.pessoas.index) FAZ UM foreach NA view ja estilizada
+@extends('adminlte::page')
+
+@section('title', 'pessoaos')
+
+@section('content_header')
+<ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('gerals.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('pessoas.index') }}" class="active">Perfis</a></li>
+    </ol>
+
+@stop
+
+@section('content')
+   
+            <div class="card">
+            <div class="card-header">
+                #filtross
+
+                </div>
+        <div class="card-body">
+
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                     <th style="width: 50px">Ação</th>
+
+                </tr>
+
+            </thead>
+            <body>
+                @foreach($pessoas as $pessoa)
+                 <tr>
+                    <td>{{ $pessoa->name }}</td>
+                    <td>{{ $pessoa->cpf }}</td>
+                    <td>
+                    <a href="url" class="btn btn-warning">Detalhe</a>
+                    </td>
+                    </tr>
+                @endforeach
+            </body>
+        </table>
+       
+    
+                </div>
+            </div>
+
+@stop
+---------------------------------------------Não VAI APARECER REGISTRO POIS NOSSO BD ESTA VAZIO
+-------------PODEMOS PREENCHER MANUALEMENTE SOMENTE PARA VISUALIZAR ---NÃO FAREI ISSO
+
+---------------------------------------------------------VAMOS PAGINAR
+VAI EM pessoaController e troca all por paginate SEGUIDO PELO NUMERO DE REGISTRO POR PAGINA, O PADRAO È 15
+public function index()
+        {
+                $pessoas = $this->repository->paginate(1);
+            return view('admin.pages.pessoas.index', [
+                'pessoas' => $pessoas,
+                ]);
+        }
+
+
+
+----------VAI NA View index e acrecentar NO FINAL UMA div CONTENDO A NOSSA PAGINAÇÂO
+
+      </tr>
+                @endforeach
+            </body>
+        </table>
+       
+    
+                </div>
+            </div>
+
+            <div class="card-footer">
+                {!! $pessoas->links() !!}
+            </div>
+
+@stop
+
+----------------------------------VAMOS DEIXAR DEFAULD E DO REGITRO DO MAIS ANTIGO PAR O MAIS NOVO, METODO Latext
+public function index()
+        {
+                $pessoas = $this->repository->latest()->paginate();
+            return view('admin.pages.pessoas.index', [
+                'pessoas' => $pessoas,
+                ]);
+        }
+}
+
+ATENÇÂO : NO FINAL RESOLVIR DEIXAR O METODO index DO pessoasContoller COMO ABAIXO:
+
+public function index()
+    {
+        $pessoas = $this->repository->latest()->paginate();
+
+        return view('admin.pages.pessoas.index', compact('pessoas'));
+    }
+
+
+
+18-----------------VAMOS FAZER UM PARENTESES E CRIAR NOSSOS ALERTAS (alerts) -
+ DENTRO DE resource\view\admin\includes\alerts.blade.php
+
+@if ($errors->any())
+    <div class="alert alert-warning">
+        @foreach ($errors->all() as $error)
+            <p>{{ $error }}</p>
+        @endforeach
+    </div>
+@endif
+
+@if (session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
+@if (session('info'))
+    <div class="alert alert-warning">
+        {{ session('info') }}
+    </div>
+@endif
+
+
+19--------------INSERIR REGISTRO EM PessoaCADASTRAR NOVO Pessoa---CRIAMOS UM BOTAO DE ADD NO INICIO DA PAGINA index
+
+@extends('adminlte::page')
+
+@section('title', 'Pessoa')
+
+@section('content_header')
+<ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('gerals.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('pessoas.index') }}" class="active">Perfis</a></li>
+    </ol>
+<a href="{{route('pessoas.create')}}" class="btn btn-dark">CADASTRAR PESSOAS</a>
+@stop
+
+-----------------------------------------------------------
+------E VAMOS CRIAR NOSSA View de Create com FORMULARIO DE CADASTRO E @csrf (quando for 
+criar e ou edit tem que ter  a diretriza @csrf)
+
+@extends('adminlte::page')
+
+@section('title', 'Cadastrando Nevo Pessoa')
+
+@section('content_header')
+<ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('gerals.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('pessoas.index') }}" class="active">Pessoas</a></li>
+    </ol>
+<h1>Cadastrando Nevo Pessoa  </h1>
+
+@stop
+
+@section('content')
+   
+            <div class="card">
+            <div class="card-body">
+            <form action="{{route('pessoas.store')}}" class="form" method="POST" >
+@csrf
+@include('admin.includes.alerts')
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label> Nome</label>
+      <input class="form-control" type="text" name="name" placeholder="name" value=" {{$pessoa->name ?? old('name')}} ">
+    </div>
+    <div class="form-group col-md-6">
+      <label >Vulgo</label>
+      <input type="text" class="form-control" name="vulgo" placeholder="vulgo" value=" {{$pessoa->vulgo ?? old('vulgo')}} ">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label> Mãe</label>
+      <input class="form-control" type="text" name="mae" placeholder="mae" value=" {{$pessoa->mae ?? old('mae')}} ">
+    </div>
+    <div class="form-group col-md-6">
+      <label >Nascimento</label>
+      <input type="text" class="form-control" name="nasc" placeholder="DLL" value=" {{$pessoa->nasc ?? old('nasc')}} ">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label> RG - Identidade</label>
+      <input class="form-control" type="text" name="rg"  value=" {{$pessoa->rg ?? old('rg')}} ">
+    </div>
+    <div class="form-group col-md-6">
+      <label >Expedidor</label>
+      <input type="text" class="form-control" name="exp" placeholder="DLL" value=" {{$pessoa->exp ?? old('exp')}} ">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">CPF</label>
+      <input type="text" class="form-control" name="cpf" placeholder="cpf" value=" {{$pessoa->cpf ?? old('cpf')}} ">
+    </div>
+    <div class="form-group col-md-3">
+      <label >Genero</label>
+      <select id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option>Masculino</option>
+        <option>Feminino</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputCity">Titúlo</label>
+      <input type="text" class="form-control" name="cpf" placeholder="cpf" value=" {{$pessoa->cpf ?? old('cpf')}} ">
+    </div>
+    </div>
+    <div class="form-row">
+    <div class="form-group col-md-6">
+      <label> Naturalidade</label>
+      <input class="form-control" type="text" name="rg"  value=" {{$pessoa->rg ?? old('rg')}} ">
+    </div>
+    <div class="form-group col-md-6">
+      <label >Nacionalidade</label>
+      <input type="text" class="form-control" name="exp" placeholder="DLL" value=" {{$pessoa->exp ?? old('exp')}} ">
+    </div>
+    </div>
+
+  <div class="form-group">
+    <label for="inputAddress">Address</label>
+    <textarea type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"></textarea>
+  </div>
+  
+  
+  
+  <button type="submit" class="btn btn-primary">CADASTRAR PESSOAS in</button>
+
+</form>
+
+
+</div>
+</div>
+
+
+@endsection  
+------------------------------------TESTAR (Deve vim vazia sem acusar erro)
+
+
+-------------------------------------vamos CRIAR O METODO create e store em PessoaController
+------- NETODO CREATE - somente testar router
+//public function create(Request $request) ---NOTE QUE TIREI OS Request
+
+/**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('admin.pages.pessoas.create');
+    }
+
+---------------------------TESTAR (Deve vim cheia sem erro)
+
+
+-------------------- O METODO STORE (quem vai realmente cadastra) PODE SER ASSIM, mais dessa forma daria 
+um erro pois colocamos no Fillable o CAMPO 'url", que ainda nao temos, mas podemos CORRIGIR COM O item 19.1
+ public function store(Request $request)
+        {
+
+            $this->repository->create($request->all());
+            return redirect ()-> route('pessoas.index');
+        }
+
+        
+    -----Estou aqui *
+19.1----------------------------------O STORE PODERIA SER ASSIM  ESSE com uma VARIAVEL $data e usando 
+o KEBAB (que pega no endereco da url o request name), para isso DEFININOS  A CLASSE NO INICIO (ACIMA) ---FIZ
+COMO MOSTRAR O ITEM 19.2
+use Illuminate\Support\Str;
+ public function store(Request $request)
+        {
+            $data = $request->all();
+            $data['url']= Str::kebab($request->name);
+            $this->repository->create($data);
+            return redirect ()-> route('pessoas.index');
+        }
+
+
+
+
+19.2 ---ATENÇÃO --FICOU ASSIM O METODO store DO pessoaController
+/**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\StoreUpdatePessoa$request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+       
+        $data = $request->all();
+        $data['url']= Str::kebab($request->name);
+        
+
+        $this->repository->create($data);
+
+        return redirect()->route('pessoas.index');
+    }
+
+
+
+---------------Confere o fillable na MODEL pessoas
+ protected $fillable = ['name', 'url', 'vulgo', 'mae', 'genero', 'rg', 'exp', 'cpf', 'situa', 'nasc', 'description'];
+}
+
+--------------------------------------------------------------------------OK...PRONTO TESTAR (nao consegui
+por select aption , mudei para textbox e a VIEW create FICOU ASSIM )
+
+@extends('adminlte::page')
+
+@section('title', 'Cadastrando Nevo Pessoa)
+
+@section('content_header')
+<ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('gerals.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('pessoas.index') }}" class="active">Pessoa/a></li>
+    </ol>
+<h1>Cadastrando Nevo Pessoa </h1>
+
+@stop
+
+@section('content')
+   
+            <div class="card">
+            <div class="card-body">
+            <form action="{{route('pessoas.store')}}" class="form" method="POST" >
+@csrf
+@include('admin.includes.alerts')
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label> Nome</label>
+      <input class="form-control" type="text" name="name" placeholder="name" value=" {{$pessoa->name ?? old('name')}} ">
+    </div>
+    <div class="form-group col-md-6">
+      <label >Vulgo</label>
+      <input type="text" class="form-control" name="vulgo" placeholder="vulgo" value=" {{$pessoa->vulgo ?? old('vulgo')}} ">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label> Mãe</label>
+      <input class="form-control" type="text" name="mae" placeholder="mae" value=" {{$pessoa->mae ?? old('mae')}} ">
+    </div>
+    <div class="form-group col-md-6">
+      <label >Nascimento</label>
+      <input type="text" class="form-control" name="nasc" placeholder="DLL" value=" {{$pessoa->nasc ?? old('nasc')}} ">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label> RG - Identidade</label>
+      <input class="form-control" type="text" name="rg"  value=" {{$pessoa->rg ?? old('rg')}} ">
+    </div>
+    <div class="form-group col-md-6">
+      <label >Expedidor</label>
+      <input type="text" class="form-control" name="exp" placeholder="DLL" value=" {{$pessoa->exp ?? old('exp')}} ">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">CPF</label>
+      <input type="text" class="form-control" name="cpf" placeholder="cpf" value=" {{$pessoa->cpf ?? old('cpf')}} ">
+    </div>
+    <div class="form-group col-md-3">
+      <label >Genero</label>
+      <input type="text" class="form-control" name="genero" placeholder="genero" value=" {{$pessoa->genero ?? old('genero')}} ">
+     </div>
+     <div class="form-group col-md-3">
+      <label >Situação Penal</label>
+      <input type="text" class="form-control" name="situa" placeholder="situa" value=" {{$pessoa->situa ?? old('situa')}} ">
+     </div>
+    
+    </div>
+  <div class="form-group">
+    <label for="inputAddress">Observação</label>
+    <textarea type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"></textarea>
+ </div>
+   <button type="submit" class="btn btn-primary">CADASTRAR PESSOAS</button>
+</form>
+</div>
+</div>
+@endsection   
+
+----------------------------------------------------------------------OK PERFEITO CADASTROU E EXIBIU pelo id (ficou o link VER)
+NOSSA PAGINAS FICARAM ASSIM ;
+
+-------ViEW index 
+@extends('adminlte::page')
+
+@section('title', 'Pessoa')
+
+@section('content_header')
+<ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('gerals.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('pessoas.index') }}" class="active">Pessoa/a></li>
+    </ol>
+    <a href="{{route('pessoas.create')}}" class="btn btn-dark">CADASTRAR PESSOAS</a>
+        @stop
+
+@section('content')
+   
+            <div class="card">
+            <div class="card-header">
+                #filtross
+
+                </div>
+        <div class="card-body">
+
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Vulgo</th>
+                     <th style="width: 50px">Ação</th>
+
+                </tr>
+
+            </thead>
+            <body>
+                @foreach($pessoas as $pessoa)
+                 <tr>
+                    <td>{{ $pessoa->name }}</td>
+                    <td>{{ $pessoa->vulgo }}</td>
+                    <td>
+                    <a href="{{ route('pessoas.show', $pessoa->id) }}" class="btn btn-warning">VER</a>
+                    </td>
+                    </tr>
+                @endforeach
+            </body>
+        </table>
+       
+    
+                </div>
+            </div>
+            <div class="card-footer">
+                {!! $pessoas->links() !!}
+            </div>
+
+@stop
+
+----  View Create
+
+@extends('adminlte::page')
+
+@section('title', 'Cadastrando Nevo Pessoa)
+
+@section('content_header')
+<ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('gerals.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('pessoas.index') }}" class="active">Pessoa/a></li>
+    </ol>
+<h1>Cadastrando Nevo Pessoa </h1>
+
+@stop
+
+@section('content')
+   
+            <div class="card">
+            <div class="card-body">
+            <form action="{{route('pessoas.store')}}" class="form" method="POST" >
+@csrf
+@include('admin.includes.alerts')
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label> Nome</label>
+      <input class="form-control" type="text" name="name" placeholder="name" value=" {{$pessoa->name ?? old('name')}} ">
+    </div>
+    <div class="form-group col-md-6">
+      <label >Vulgo</label>
+      <input type="text" class="form-control" name="vulgo" placeholder="vulgo" value=" {{$pessoa->vulgo ?? old('vulgo')}} ">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label> Mãe</label>
+      <input class="form-control" type="text" name="mae" placeholder="mae" value=" {{$pessoa->mae ?? old('mae')}} ">
+    </div>
+    <div class="form-group col-md-6">
+      <label >Nascimento</label>
+      <input type="text" class="form-control" name="nasc" placeholder="DLL" value=" {{$pessoa->nasc ?? old('nasc')}} ">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label> RG - Identidade</label>
+      <input class="form-control" type="text" name="rg"  value=" {{$pessoa->rg ?? old('rg')}} ">
+    </div>
+    <div class="form-group col-md-6">
+      <label >Expedidor</label>
+      <input type="text" class="form-control" name="exp" placeholder="DLL" value=" {{$pessoa->exp ?? old('exp')}} ">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">CPF</label>
+      <input type="text" class="form-control" name="cpf" placeholder="cpf" value=" {{$pessoa->cpf ?? old('cpf')}} ">
+    </div>
+    <div class="form-group col-md-3">
+      <label >Genero</label>
+      <input type="text" class="form-control" name="genero" placeholder="genero" value=" {{$pessoa->genero ?? old('genero')}} ">
+     </div>
+     <div class="form-group col-md-3">
+      <label >Situação Penal</label>
+      <input type="text" class="form-control" name="situa" placeholder="situa" value=" {{$pessoa->situa ?? old('situa')}} ">
+     </div>
+    
+    </div>
+  <div class="form-group">
+    <label for="inputAddress">Observação</label>
+    <textarea type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"></textarea>
+ </div>
+   <button type="submit" class="btn btn-primary">CADASTRAR PESSOAS</button>
+</form>
+</div>
+</div>
+@endsection  
+-------ViEW Show 
+
+@extends('adminlte::page')
+
+@section('title', "DETALHE Pessoa  {$pessoa->name} ")
+
+@section('content_header')
+<h1>Detalhe do Palno <b>{{ $pessoa->name }}</b>  </h1>
+
+@stop
+
+@section('content')
+
+            <div class="card">
+            <div class="card-body">
+            <ul>
+            <li>
+            <strong>NOME</strong> {{ $pessoa->name }}
+            </li>
+            <li>
+            <strong>Url</strong> {{ $pessoa->url }}
+            </li>
+           
+            <li>
+            <strong>DESCRIÇÂO</strong> {{ $pessoa->description }}
+            </li>
+            </ul>
+            </div>
+            </div>
+            @endsection
+
+-----------pessoasCONTROLLER
+<?php
+
+namespace App\Http\Controllers\Admin;
+use Illuminate\Support\Str;
+use App\Http\Controllers\Controller;
+use App\Models\Pessoause Illuminate\Http\Request;
+
+class PessoaController extends Controller
+{
+    //
+    private $repository;
+
+    public function __construct(Pessoapessoa)
+    {
+        $this->repository = $pessoa;
+
+      //  $this->middleware(['can:pessoas']);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $pessoas = $this->repository->latest()->paginate(5);
+
+        return view('admin.pages.pessoas.index', compact('pessoas'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('admin.pages.pessoas.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\StoreUpdatePessoa$request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+       
+        $data = $request->all();
+        $data['url']= Str::kebab($request->name);
+        
+
+        $this->repository->create($data);
+
+        return redirect()->route('pessoas.index');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        if (!$pessoa = $this->repository->find($id)) {
+            return redirect()->back();
+        }
+
+        return view('admin.pages.pessoas.show', compact('pessoa'));
+    }
+
+    
+
+}
+
+
+-------router
+
+<?php
+
+//ROTAS DE PESSOAS
+
+Route::get('/admin/pessoas/create', 'Admin\PessoaController@create')->name('pessoas.create');
+
+Route::delete('/admin/pessoas/{url}', 'Admin\PessoaController@destroy')->name('pessoas.destroy');
+Route::get('/admin/pessoas/{url}', 'Admin\PessoaController@show')->name('pessoas.show');
+Route::post('/admin/pessoas', 'Admin\PessoaController@store')->name('pessoas.store');
+
+Route::get('/admin/pessoas', 'Admin\PessoaController@index')->name('pessoas.index');
+
+
+
+//ROTAS DE GERAIS
+Route::get('/admin/gerals', 'Admin\GeralController@index')->name('gerals.index');
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Auth::routes();
+/*
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+*/
+
+
+
+20----------------------------DELETAR Pessoa-
