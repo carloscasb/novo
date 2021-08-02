@@ -804,7 +804,7 @@ criar e ou edit tem que ter  a diretriza @csrf)
 
 
 -------------------- O METODO STORE (quem vai realmente cadastra) PODE SER ASSIM, mais dessa forma daria 
-um erro pois colocamos no Fillable o CAMPO 'url", que ainda nao temos, mas podemos CORRIGIR COM O item 19.1
+um erro pois colocamos no Fillable da model o CAMPO 'url", que ainda nao temos, mas podemos CORRIGIR COM O item 19.1
  public function store(Request $request)
         {
 
@@ -851,9 +851,7 @@ use Illuminate\Support\Str;
 
 
 ---------------Confere o fillable na MODEL pessoas
- protected $fillable = ['name', 'url', 'vulgo', 'mae', 'genero', 'rg', 'exp', 'cpf', 'situa', 'nasc', 'description'];
-}
-
+  protected $fillable = ['name', 'url', 'vulgo', 'mae', 'genero', 'rg', 'exp', 'cpf', 'titulo', 'natural', 'nacionalidade', 'nascimeto',  'description'];
 --------------------------------------------------------------------------OK...PRONTO TESTAR (nao consegui
 por select aption , mudei para textbox e a VIEW create FICOU ASSIM )
 
