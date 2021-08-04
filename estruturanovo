@@ -1,0 +1,1097 @@
+------INSTALAÇÂO------
+
+
+BAIXAR E INSTALAR O WAMP64 
+BAIXAR o COMPOSER e INSTALAR --- Indicar diretório certo PHP dentro do diretorio certo quando pergunat pelo diretorio do php
+
+-----FAZ A INSTALAÇÂO DO LARAVEL
+C:\wamp64\www>composer global require laravel/installer
+C:\wamp64\www>composer create-project --prefer-dist laravel/laravel novo
+
+
+----CRIAR ARQUIVO BAT 
+
+(abre o bloco de nota e salva com extensão. bat)
+
+
+c:\User\...>cd\
+
+C:\> cd wamp64\www\
+
+
+---------ARQUIVO BAT
+cd\
+cd wamp64\www\novo
+php artisan serve
+
+------------
+
+--------COMNDO BONS
+
+composer dump-autoload
+php artisan migrate
+php artisan migrate:fresh
+php artisan migrate:refresh
+
+---FAZER MODELAGEM DO BANCO DE DADOS
+Produto vai ter vinculado apenas 1 categoria
+usuario relcionamneto com ENDEREÇO
+itensPedido vai ter referencia do produto
+
+-------COLOCAR 10 imagem no diretório public/images
+produto1.jpg...
+
+------ FAZER VIEW Home usando bootstrap
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content ="width-device-width, initial-scale=1.0">
+    <title>Novo</title>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.0-2/js/bootstrap.min.js">
+  </head>
+  <body>
+      <nav class ="navbar navbar-light navbar-expand-md bg-light pl-5 pr-5 mb-5">
+
+<a href="#" class="navbar-brand">Myshop</a>
+<div class="collapse navbar-collapse">
+    <div class="navbar-nav">
+    <a  class="nav-link" href="{{ route('home')}}" >Home</a>
+    <a  class="nav-link" href="{{ route ('categoria')}}" >Categorias</a>
+    <a  class="nav-link" href="{{ route ('cadastrar')}}" >Cadastrar</a>
+    
+</div>
+</div>
+<a href="#" class="btn btn-sm"><i class="fas fa-edit"></i></a>
+</nav>
+
+<div class="container">
+<div class="row"> 
+<div class="col-3 mb-3">
+<div class="card">
+
+<img src="{{asset('images/produto1.jpg' ) }}"    class="card-img-top" />
+<div class="card-body">
+<h6 class="card-title"> Produto 1</h6>
+<a rhef="#" class="btn btn-sm btn-primary">Add item</a>
+
+</div>
+</div>
+</div>
+
+<div class="col-3 mb-3">
+<div class="card">
+
+<img src="{{asset('images/produto2.jpg' ) }}"    class="card-img-top" />
+<div class="card-body">
+<h6 class="card-title"> Produto 2</h6>
+<a rhef="#" class="btn btn-sm btn-primary">Add item</a>
+
+</div>
+</div>
+</div>
+
+
+<div class="col-3 mb-3">
+
+<div class="card">
+
+<img src="{{asset('images/produto3.jpg' ) }}" class="card-img-top" />
+<div class="card-body">
+<h6 class="card-title"> Produto 3</h6>
+<a rhef="#" class="btn btn-sm btn-primary">Add item</a>
+</div>
+</div>
+</div>
+
+<div class="col-3 mb-3">
+<div class="card">
+
+<img src="{{asset('images/produto4.jpg' ) }}"    class="card-img-top" />
+<div class="card-body">
+<h6 class="card-title"> Produto 4</h6>
+<a rhef="#" class="btn btn-sm btn-primary">Add item</a>
+
+</div>
+</div>
+</div>
+
+
+<div class="col-3 mb-3">
+<div class="card">
+
+<img src="{{asset('images/produto5.jpg' ) }}"    class="card-img-top" />
+<div class="card-body">
+<h6 class="card-title"> Produto 5</h6>
+<a rhef="#" class="btn btn-sm btn-primary">Add item</a>
+
+</div>
+</div>
+</div>
+
+<div class="col-3 mb-3">
+<div class="card">
+
+<img src="{{asset('images/produto6.jpg' ) }}"    class="card-img-top" />
+<div class="card-body">
+<h6 class="card-title"> Produto 6</h6>
+<a rhef="#" class="btn btn-sm btn-primary">Add item</a>
+
+</div>
+</div>
+</div>
+
+<div class="col-3 mb-3">
+<div class="card">
+
+<img src="{{asset('images/produto7.jpg' ) }}"    class="card-img-top" />
+<div class="card-body">
+<h6 class="card-title"> Produto 7</h6>
+<a rhef="#" class="btn btn-sm btn-primary">Add item</a>
+
+</div>
+</div>
+</div>
+
+<div class="col-3 mb-3">
+<div class="card">
+
+<img src="{{asset('images/produto8.jpg' ) }}"    class="card-img-top" />
+<div class="card-body">
+<h6 class="card-title"> Produto 8</h6>
+<a rhef="#" class="btn btn-sm btn-primary">Add item</a>
+
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+    Aqui vai o código HTML que fará seu site aparecer.
+
+
+
+     <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
+
+
+
+---CRIAR model CATEGORIAS, PRODUTOS, USUSRIO, ENDEREÇO, PEDIDO,
+E ITEM_PEDIDO com repectivas MIGRATIONS
+
+# php artisan make:model Categoria -m
+# php artisan make:model Produto -m
+# php artisan make:model Usuario -m
+# php artisan make:model Endereco -m
+# php artisan make:model Pedido -m
+# php artisan make:model ItensPedido -m
+
+---VOU EM MODELS e Crio a classe RModel genereica (defalud) que conterá algunas propriedaes
+especificas que outras classe herdarão
+
+---Replica uma Models e EDITA
+
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class RModel extends Model
+{
+    
+
+    protected $primaryKey = "id";
+    public $timestamps = true; 
+    public $incremeting = true;
+    protected $fillable = [];
+
+
+    public function beforeSave () {
+
+        return true;
+    }
+
+
+
+    public function save (array $options = []) {
+
+        try{
+
+            if(!$this->beforeSave()) {
+
+                return false;
+            }
+
+            return parent::save($options);
+        
+        }catch (\Exception $e) {
+             throw new \Exception($e -> getMessage());
+}      
+
+    }
+
+
+}
+
+
+
+---FEITO ESSA VALIDAÇÃO 
+vou em cada Models e substitui a Herança de Model para RModel
+
+EXEMPLO---como estava
+
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Categoria extends Model
+{
+    use HasFactory;
+}
+
+---COMO FICA
+
+<?php
+
+namespace App\Models;
+
+class Categoria extends RModel
+{
+    
+}
+
+-----TODA FICARAM ASSIM - herdando a configuração feita na RModel
+
+
+-----VAMOS EM DATABASE MIGRATIONS e DELETAMOS as migratiosn
+de User, passaword e falled
+
+----E CRIAR as tabelas nas MIGRATIONS
+ --------CATEGORIAS
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateCategoriasTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('categorias', function (Blueprint $table) {
+            $table->increments("id");
+            $table->string("categoria", 100);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('categorias');
+    }
+}
+
+---PRODUTOS
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateProdutosTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('produtos', function (Blueprint $table) {
+            $table->increments("id");
+
+            $table->string("nome", 100);
+            $table->decimal("valor", 10,2);
+            $table->string("foto", 100)->nullable();
+            $table->string("descricao", 255)->nullable();
+            $table->integer("categoria_id")->unsigned;
+
+            $table->timestamps();
+            
+            $table->foreign("categoria_id")
+            ->references("id")->on("categorias")
+            ->onDelete("cascade");
+           
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('produtos');
+    }
+}
+
+ 
+--------USUARIOS
+
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateUsuariosTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('usuarios', function (Blueprint $table) {
+            $table->increments("id");
+            $table->string("login", 100)->unique;
+            $table->string("password", 255);
+            $table->string("nome", 50);
+            
+
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('usuarios');
+    }
+}
+
+
+
+---ENDEREÇO 
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateEnderecosTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('enderecos', function (Blueprint $table) {
+            $table->increments("id");
+            $table->string("logradouro");
+            $table->string("numero");
+            $table->string("cidade");
+            $table->string("estado");
+            $table->string("cep");
+            $table->string("complemento");
+           
+            $table->integer("usuario_id")->unsigned();
+            
+            $table->timestamps();
+
+            $table->foreign("usuario_id")
+            ->references("id")->on("usuarios")
+            ->onDelete("cascade");
+
+
+            
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('enderecos');
+    }
+}
+
+
+---PEDIDO
+
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreatePedidoosTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('pedidos', function (Blueprint $table) {
+            $table->increments("id");
+            $table->datetime("datapedido");
+            $table->string("status", 4);
+            $table->integer("usuario_id")->unsigned();
+
+
+            $table->timestamps();
+
+            $table->foreign("usuario_id")
+            ->references("id")->on("usuarios")
+            ->onDelete("cascade");
+
+
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('pedidos');
+    }
+}
+
+
+------ITENSPEDIDOS
+
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateItensPedidosTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('itens_pedidos', function (Blueprint $table) {
+            $table->increments("id");
+            $table->integer("quantidade");
+            $table->decimal("valor", 10, 2);
+            $table->datetime("dt_item");
+
+            $table->integer("produto_id")->unsigned();
+            $table->integer("pedido_id")->unsigned();
+
+            $table->timestamps();
+
+            $table->foreign("produto_id")
+            ->references("id")->on("produtos")
+            ->onDelete("cascade");
+
+            $table->foreign("pedido_id")
+            ->references("id")->on("pedidos")
+            ->onDelete("cascade");
+
+
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('itens_pedidos');
+    }
+}
+
+---PASSEI UM DUM-LOAD (opcional)
+# composer dum-autoload
+
+---- VAMOS NO AQUI .ENV e configura
+
+APP_NAME=Novo
+APP_ENV=local
+APP_KEY=base64:CKtS+zdXznSIZERFyfV6QkxS8IRIO6W9MVFzMG6C3SM=
+APP_DEBUG=true
+APP_URL=http://novo.teste
+LOG_CHANNEL=stack
+LOG_LEVEL=debug
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=novo
+DB_USERNAME=carlos
+DB_PASSWORD=casb
+
+
+-------RODAR  MIGRATIONS
+# php artisan migrate
+
+
+-------OK PERFEITO
+
+--------------ROTAS--------------
+---Antes vamos vriar um Produtocontroller
+
+# php artisan make:controller ProdutoController
+
+----Agora vamos em ROTA apagar a rota existente e criar uma Rota com array
+--ESTAVA ASSIM
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+/*
+Route::get('/', function () {
+    return view('welcome');
+});
+*/
+
+
+
+Route::get('/', function () {
+    return view('home');
+});
+
+---VAI FICAR ASSIM
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProdutoController;
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+/* se a rota / for via get ou post 
+ela chame a classe ProdutoController (declare la em cima), especificamente o 
+metodo index
+
+*/
+Route::match (['get', 'post'], '/', [ ProdutoController::class, 'index'])->name('home');
+
+-------VOLTAMOS NO ProdutoController e criamos o metodo index
+--configura pra ateste
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class ProdutoController extends Controller
+{
+    public function index(Request $request){
+
+echo "pagina teste";
+
+    }
+}
+---OK PERFEITO
+
+---Vamos no metodo index, crir uma variavel date como array e retorna a view home
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class ProdutoController extends Controller
+{
+    public function index(Request $request){
+
+        $data=[];
+        
+        return view ('home', $data);
+
+    }
+}
+---OK PERFEITO
+
+---Vamos criar mais outras 2 ROTAS
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProdutoController;
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+/* se a rota / for via get ou post 
+ela chame a classe ProdutoController (declare la em cima), especificamente o 
+metodo index
+
+*/
+Route::match (['get', 'post'], '/', [ ProdutoController::class, 'index'])->name('home');
+Route::match (['get', 'post'], '/categoria', [ ProdutoController::class, 'categoria'])->name('categoria');
+Route::match (['get', 'post'], '/cadastrar', [ ClienteController::class, 'cadastrar'])->name('cadastrar');
+
+---- VAMOS CRIAR o metodo categoria no ProdutoController e seguir o mesmo padrão
+chamando a view categoria
+
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class ProdutoController extends Controller
+{
+    public function index(Request $request){
+
+        $data=[];
+        
+        return view ('home', $data);
+
+    }
+
+
+public function categoria(Request $request){
+
+    $data=[];
+    return view ('categoria', $data);
+}
+
+
+}
+
+
+
+------VAMOS CRIAR O Controlller ClienteController
+# php artisan make:controller ClienteController
+
+---E criar o metodo cadastrar
+
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class ClienteController extends Controller
+{
+    public function cadastrar(Request $request){
+
+        $data=[];
+        return view ('cadastrar', $data);
+    }
+    
+}
+
+----VAMOS FAZER AS VIEW categoria e cadastrar
+--CADASTRAR
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="with-device-with, initial-scale-1.0">
+    <title>Título da página</title>
+  </head>
+  <body>
+    Aqui vai o código HTML que fará seu site aparecer.
+  </body>
+</html>
+
+---CATEGORIAS
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="with-device-with, initial-scale-1.0">
+    <title>Título da página</title>
+  </head>
+  <body>
+   <h2>Categiria</h2>
+  </body>
+</html>
+
+----EM WEB DE ROTA DECLARAR Controller ClienteController
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\ClienteController;
+
+----- OK PERFEITO. funcionando
+
+----VAMOS NA (pagina) VIEW home e chama um comando route 
+
+<a href="#" class="navbar-brand">Myshop</a>
+<div class="collapse navbar-collapse">
+    <div class="navbar-nav">
+    <a  class="nav-link" href="{{ route('home')}}" >Home</a>
+    <a  class="nav-link" href="{{ route ('categoria')}}" >Categorias</a>
+    <a  class="nav-link" href="{{ route ('cadastrar')}}" >Cadastrar</a>
+    
+</div>
+</div>
+
+----OK PERFEITO
+
+---TRAbalhar BANCO DE DADOS
+
+--VAMOS CRIAR UMA MIGRATION insert_products
+
+# php artisan make:migration insert_products
+
+--Antes vamos no MODEL categoria e produtos (sabendo que herdam o RModel)
+
+---MODEL produto
+
+<?php
+
+namespace App\Models;
+
+class Produto extends Model
+{
+    // a tabel a que vai apontar é para tabela produtos
+   protected $table= "produtos";
+   //quais campos vai ser inseridos na tabela , ja que em RModel esta nulo por padrão
+   protected $fillable = ['nome', 'foto','descricao','valor','categoria_id'];
+
+}
+
+
+---MODEL categoria
+<?php
+
+namespace App\Models;
+
+class Categoria extends RModel
+{
+      // a tabel a que vai apontar é para tabela categoria
+        protected $table= "categorias";
+    //quais campos vai ser inseridos na tabela , ja que em Rmodel esta nulo por padrão
+    protected $fillable = ['categoria'];
+
+}
+
+---FEITO ISSO VOLTAMOS PARA A MIGRAION insert_products
+
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class InsertProducts extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        //PARA CADASTRAR categorias ---armagenas na variavel cat uma nova categoria de nome Geral
+        //e mandar salvar
+        $cat= new \App\Models\categoria(['categoria' => 'Geral']);
+        $cat->save();
+
+
+
+        //PARA CADASTRAR produto -----armagenas na variavel prod uma nova produto de nome dos campos da tabela
+        //e mandar salvar
+        $prod= new \App\Models\produto(['nome' =>'produto 1', 'valor'=>10, 'foto' =>'images/produto1.jpg', 'descricao'=>'', 'categoria_id'=>$cat->id]);
+        $prod->save();
+
+        $prod2= new \App\Models\produto(['nome' =>'produto 2', 'valor'=>10, 'foto' =>'images/produto2.jpg', 'descricao'=>'', 'categoria_id'=>$cat->id]);
+        $prod2->save();
+
+        $prod3= new \App\Models\produto(['nome' =>'produto 3', 'valor'=>10, 'foto' =>'images/produto3.jpg', 'descricao'=>'', 'categoria_id'=>$cat->id]);
+        $prod3->save();
+        $prod4= new \App\Models\produto(['nome' =>'produto 4', 'valor'=>10, 'foto' =>'images/produto4.jpg', 'descricao'=>'', 'categoria_id'=>$cat->id]);
+        $prod4->save();
+        $prod5= new \App\Models\produto(['nome' =>'produto 5', 'valor'=>10, 'foto' =>'images/produto5.jpg', 'descricao'=>'', 'categoria_id'=>$cat->id]);
+        $prod5->save();
+        $prod6= new \App\Models\produto(['nome' =>'produto 6', 'valor'=>10, 'foto' =>'images/produto6.jpg', 'descricao'=>'', 'categoria_id'=>$cat->id]);
+        $prod6->save();
+        $prod7= new \App\Models\produto(['nome' =>'produto 7', 'valor'=>10, 'foto' =>'images/produto7.jpg', 'descricao'=>'', 'categoria_id'=>$cat->id]);
+        $prod7->save();
+        $prod8= new \App\Models\produto(['nome' =>'produto 8', 'valor'=>10, 'foto' =>'images/produto8.jpg', 'descricao'=>'', 'categoria_id'=>$cat->id]);
+        $prod8->save();
+        
+    }
+
+    /**
+     * Reverse the migrations.
+     
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
+}
+
+
+------RODAR MIGRATION ---(fazer a iinserçaõ (insert_product) com os registros
+nas tabelas categoria e produtos
+
+# php artisan migrate 
+
+-----CRIOU OS REGISTROS nas tabelas categorias e produtos
+
+----AGORA VAMOS COMEÇAR A VER COMO BUSCA OS PRODUTOS DO BANCO DE DADOS
+---VANMOS NA VIEW home (E vamos deixar apenas um produto)
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content ="width-device-width, initial-scale=1.0">
+    <title>Novo</title>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.0-2/js/bootstrap.min.js">
+  </head>
+  <body>
+      <nav class ="navbar navbar-light navbar-expand-md bg-light pl-5 pr-5 mb-5">
+
+<a href="#" class="navbar-brand">Myshop</a>
+<div class="collapse navbar-collapse">
+    <div class="navbar-nav">
+    <a  class="nav-link" href="{{ route('home')}}" >Home</a>
+    <a  class="nav-link" href="{{ route ('categoria')}}" >Categorias</a>
+    <a  class="nav-link" href="{{ route ('cadastrar')}}" >Cadastrar</a>
+    
+</div>
+</div>
+<a href="#" class="btn btn-sm"><i class="fas fa-edit"></i></a>
+</nav>
+
+<div class="container">
+<div class="row"> 
+<div class="col-3 mb-3">
+<div class="card">
+
+<img src="{{asset('images/produto1.jpg' ) }}"    class="card-img-top" />
+<div class="card-body">
+<h6 class="card-title"> Produto 1</h6>
+<a rhef="#" class="btn btn-sm btn-primary">Add item</a>
+
+</div>
+</div>
+</div>
+
+
+</div>
+</div>
+
+   
+
+
+
+     <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
+
+-----AGORA VAMOS NO CONTROLLER QUE MOSTRAR A home (Produto controller)
+E MOSTRAREMOS TODOS OS PRODUTOS
+
+?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class ProdutoController extends Controller
+{
+    public function index(Request $request){
+
+        $data=[];
+
+        // Buscar todos os produtos ---consulta todos os produtos e joga para dentro da array
+        // ai pega a array lista la na VIEW home
+        $listaProdutos = \App\Models\Produto::all();
+        $data['lista'] = $listaProdutos;
+
+
+        
+        return view ('home', $data);
+
+    }
+
+
+public function categoria(Request $request){
+
+    $data=[];
+    return view ('categoria', $data);
+}
+
+
+}
+
+------VAMOS PEGAR NA VIEW home como um $forech
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content ="width-device-width, initial-scale=1.0">
+    <title>Novo</title>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.0-2/js/bootstrap.min.js">
+  </head>
+  <body>
+      <nav class ="navbar navbar-light navbar-expand-md bg-light pl-5 pr-5 mb-5">
+
+<a href="#" class="navbar-brand">Myshop</a>
+<div class="collapse navbar-collapse">
+    <div class="navbar-nav">
+    <a  class="nav-link" href="{{ route('home')}}" >Home</a>
+    <a  class="nav-link" href="{{ route ('categoria')}}" >Categorias</a>
+    <a  class="nav-link" href="{{ route ('cadastrar')}}" >Cadastrar</a>
+    
+</div>
+</div>
+<a href="#" class="btn btn-sm"><i class="fas fa-edit"></i></a>
+</nav>
+
+<div class="container">
+<div class="row"> 
+  @if(isset($lista))
+  @foreach ($lista as $prod)
+<div class="col-3 mb-3">
+<div class="card">
+
+<img src="{{asset($prod->foto ) }}"    class="card-img-top" />
+<div class="card-body">
+<h6 class="card-title"> {{$prod->nome}} - R$ {{$prod->valor}}</h6>
+<a rhef="#" class="btn btn-sm btn-primary">Add item</a>
+
+</div>
+</div>
+</div>
+@endforeach
+@endif
+
+</div>
+</div>
+     <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
